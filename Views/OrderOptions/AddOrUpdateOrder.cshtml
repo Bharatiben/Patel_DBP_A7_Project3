@@ -1,0 +1,25 @@
+﻿@model Patel_DBP_A7_Project3.Models.OrderOption
+
+@{
+    ViewBag.Title = "AddOrUpdateOrder";
+}
+
+<h2>Add/Update OrderOption</h2>
+
+@using (Html.BeginForm("AddOrUpdateOrder", "OrderOptions", FormMethod.Post))
+{
+    @Html.HiddenFor(o => o.OrderOptionID, new { @class = "form-control" })
+    @Html.TextBoxFor(o => o.SalesTaxRate, new { @class = "form-control", placeholder = "SalesTaxRate" })
+    @Html.TextBoxFor(o => o.FirstBookShipCharge, new { @class = "form-control", placeholder = "FirstBookShipCharge" })
+    @Html.TextBoxFor(o => o.AdditionalBookShipCharge, new { @class = "form-control", placeholder = "AdditionalBookShipCharge" })
+
+    <input type="submit" name="Create" class="btn btn-info" />
+    <input type="reset" name="Clear" class="btn btn-info" />
+    <input type="button" name="Back" value="Back" onclick="HomePage()" class="btn btn-info" />
+}
+
+<script>
+    function HomePage() {
+        window.location.href = '/OrderOptions/AllOrder/';
+    }
+</script>

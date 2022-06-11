@@ -1,0 +1,24 @@
+﻿@model Patel_DBP_A7_Project3.Models.Product
+@{
+    ViewBag.Title = "AddOrUpdateProduct";
+}
+
+<h2>Add/Update Product</h2>
+
+@using (Html.BeginForm("AddOrUpdateProduct", "Products", FormMethod.Post))
+{
+    @Html.TextBoxFor(p => p.ProductCode, new { @class = "form-control", placeholder = "ProductCode" })
+    @Html.TextBoxFor(p => p.Description, new { @class = "form-control", placeholder = "Description" })
+    @Html.TextBoxFor(p => p.UnitPrice, new { @class = "form-control", placeholder = "UnitPrice" })
+    @Html.TextBoxFor(p => p.OnHandQuantity, new { @class = "form-control", placeholder = "OnHandQuantity" })
+
+    <input type="submit" name="Create" class="btn btn-info" />
+    <input type="reset" name="Clear" class="btn btn-info" />
+    <input type="button" name="Back" value="Back" onclick="HomePage()" class="btn btn-info" />
+}
+
+<script>
+    function HomePage() {
+        window.location.href = '/Products/AllProduct/';
+    }
+</script>

@@ -1,0 +1,36 @@
+﻿@model Patel_DBP_A7_Project3.Models.InvoiceDTO
+
+@{
+    ViewBag.Title = "AddOrUpdateInvoice";
+}
+
+<h2>Add/Update Invoice</h2>
+
+@using (Html.BeginForm("AddOrUpdateInvoice", "Invoices", FormMethod.Post))
+{
+    @Html.HiddenFor(i => i.invoice1.InvoiceID, new { @class = "form-control" })
+
+    <input list="customers" name="invoice1.CustomerID" class="form-control" placeholder="CustomerID" />
+    <datalist id="customers">
+        @foreach (var customer in Model.customer1)
+        {
+            <option value="@customer.CustomerID">@customer.Name</option>
+        }
+    </datalist>
+
+    @Html.TextBoxFor(i => i.invoice1.InvoiceDate, new { @class = "form-control", placeholder = "InvoiceDate" })
+    @Html.TextBoxFor(i => i.invoice1.ProductTotal, new { @class = "form-control", placeholder = "ProductTotal" })
+    @Html.TextBoxFor(i => i.invoice1.SalesTax, new { @class = "form-control", placeholder = "SalesTax" })
+    @Html.TextBoxFor(i => i.invoice1.Shipping, new { @class = "form-control", placeholder = "Shipping" })
+    @Html.TextBoxFor(i => i.invoice1.InvoiceTotal, new { @class = "form-control", placeholder = "InvoiceTotal" })
+
+    <input type="submit" name="Create" class="btn btn-info" />
+    <input type="reset" name="Clear" class="btn btn-info" />
+    <input type="button" name="Back" value="Back" onclick="HomePage()" class="btn btn-info" />
+}
+
+<script>
+    function HomePage() {
+        window.location.href = '/Invoices/AllInvoice/';
+    }
+</script>

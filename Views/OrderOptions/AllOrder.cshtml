@@ -1,0 +1,55 @@
+﻿@model List<Patel_DBP_A7_Project3.Models.OrderOption>
+
+@{
+    ViewBag.Title = "AllOrder";
+}
+
+<h2>List of OrderOption</h2>
+
+<a href="/OrderOptions/AddOrUpdateOrder">Add New Order</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <input id="txtSearch" type="text" class="form-control" placeholder="Search..." />
+    </div>
+    <div class="col-md-6">
+        <input type="button" class="btn btn-info" value="Search" onclick="Sortable.Search();" />
+    </div>
+</div>
+
+<table class="sortable table table-hover">
+    <thead>
+        <tr>
+            <th onclick="Sortable.Sort(0, true);">OrderOption ID</th>
+            <th onclick="Sortable.Sort(1, true);">SalesTax Rate</th>
+            <th onclick="Sortable.Sort(2, true);">First BookShip Charge</th>
+            <th onclick="Sortable.Sort(3, true);">Additional BookShip Charge</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*Loop through the "allCustomers" list to display CustomerId and Customer *@
+        @*customer is an object/entity of Customer Class/Model through which we can access all the fields of that model/class/table *@
+
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderOptionID</td>
+                <td>@order.SalesTaxRate</td>
+                <td>@order.FirstBookShipCharge</td>
+                <td>@order.AdditionalBookShipCharge</td>
+                <td>
+                    <a href="/OrderOptions/AddOrUpdateOrder/@order.OrderOptionID">Edit</a>
+                    <a href="/OrderOptions/DeleteOrder/@order.OrderOptionID">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script>
+    Sortable.baseUrl = '/OrderOptions/AllOrder/';
+</script>
+
+

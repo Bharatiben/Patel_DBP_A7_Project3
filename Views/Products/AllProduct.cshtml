@@ -1,0 +1,55 @@
+﻿@model List<Patel_DBP_A7_Project3.Models.Product>
+
+@{
+    ViewBag.Title = "AllProduct";
+}
+
+<h2>List of Product</h2>
+
+<a href="/Products/AddOrUpdateProduct">Add New Product</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <input id="txtSearch" type="text" class="form-control" placeholder="Search..." />
+    </div>
+    <div class="col-md-6">
+        <input type="button" class="btn btn-info" value="Search" onclick="Sortable.Search();" />
+    </div>
+</div>
+
+<table class="sortable table table-hover">
+    <thead>
+        <tr>
+            <th onclick="Sortable.Sort(0, true);">Product Code</th>
+            <th onclick="Sortable.Sort(1, true);">Description</th>
+            <th onclick="Sortable.Sort(2, true);">Unit Price</th>
+            <th onclick="Sortable.Sort(3, true);">OnHandQuantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*Loop through the "allCustomers" list to display CustomerId and Customer *@
+        @*customer is an object/entity of Customer Class/Model through which we can access all the fields of that model/class/table *@
+
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductCode</td>
+                <td>@product.Description</td>
+                <td>@product.UnitPrice</td>
+                <td>@product.OnHandQuantity</td>
+                <td>
+                    <a href="/Products/AddOrUpdateProduct/@product.ProductCode">Edit</a>
+                    <a href="/Products/DeleteProduct/@product.ProductCode">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script>
+    Sortable.baseUrl = '/Products/AllProduct/';
+</script>
+
+

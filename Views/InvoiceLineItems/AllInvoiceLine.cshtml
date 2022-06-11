@@ -1,0 +1,57 @@
+﻿@model List<Patel_DBP_A7_Project3.Models.InvoiceLineItem>
+
+@{
+    ViewBag.Title = "AllInvoiceLine";
+}
+
+<h2>All InvoiceLine</h2>
+
+<a href="/InvoiceLineItems/AddOrUpdateInvoiceLine">Add New Invoice Line</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <input id="txtSearch" type="text" class="form-control" placeholder="Search..." />
+    </div>
+    <div class="col-md-6">
+        <input type="button" class="btn btn-info" value="Search" onclick="Sortable.Search();" />
+    </div>
+</div>
+
+<table class="sortable table table-hover">
+    <thead>
+        <tr>
+            <th onclick="Sortable.Sort(0, true);">Invoice ID</th>
+            <th onclick="Sortable.Sort(1, true);">Product Code</th>
+            <th onclick="Sortable.Sort(2, true);">Unit Price</th>
+            <th onclick="Sortable.Sort(3, true);">Quantity</th>
+            <th onclick="Sortable.Sort(4, true);">Item Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*Loop through the "allCustomers" list to display CustomerId and Customer *@
+        @*customer is an object/entity of Customer Class/Model through which we can access all the fields of that model/class/table *@
+
+        @foreach (var invoiceLine in Model)
+        {
+            <tr>
+                <td>@invoiceLine.InvoiceID</td>
+                <td>@invoiceLine.ProductCode</td>
+                <td>@invoiceLine.UnitPrice</td>
+                <td>@invoiceLine.Quantity</td>
+                <td>@invoiceLine.ItemTotal</td>
+                <td>
+                    <a href="/InvoiceLineItems/AddOrUpdateInvoiceLine/@invoiceLine.InvoiceID">Edit</a>
+                    <a href="/InvoiceLineItems/DeleteInvoiceLine/@invoiceLine.InvoiceID">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script>
+    Sortable.baseUrl = '/InvoiceLineItems/AllInvoiceLine/';
+</script>
+
+

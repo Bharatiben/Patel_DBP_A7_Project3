@@ -1,0 +1,60 @@
+﻿@model List<Patel_DBP_A7_Project3.Models.Invoice>
+
+@{
+    ViewBag.Title = "AllInvoice";
+}
+
+<h2>List of Invoices</h2>
+
+<a href="/Invoices/AddOrUpdateInvoice">Add New Invoice</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <input id="txtSearch" type="text" class="form-control" placeholder="Search..." />
+    </div>
+    <div class="col-md-6">
+        <input type="button" class="btn btn-info" value="Search" onclick="Sortable.Search();" />
+    </div>
+</div>
+
+<table class="sortable table table-hover">
+    <thead>
+        <tr>
+            <th onclick="Sortable.Sort(0, true);">Invoice Id</th>
+            <th onclick="Sortable.Sort(1, true);">Customer ID</th>
+            <th onclick="Sortable.Sort(2, true);">Invoice Date</th>
+            <th onclick="Sortable.Sort(3, true);">Product Total</th>
+            <th onclick="Sortable.Sort(4, true);">Sales Tax</th>
+            <th onclick="Sortable.Sort(5, true);">Shipping</th>
+            <th onclick="Sortable.Sort(4, true);">Invoice Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*Loop through the "allCustomers" list to display CustomerId and Customer *@
+        @*customer is an object/entity of Customer Class/Model through which we can access all the fields of that model/class/table *@
+
+        @foreach (var invoice in Model)
+        {
+            <tr>
+                <td>@invoice.InvoiceID</td>
+                <td>@invoice.CustomerID</td>
+                <td>@invoice.InvoiceDate</td>
+                <td>@invoice.ProductTotal</td>
+                <td>@invoice.SalesTax</td>
+                <td>@invoice.Shipping</td>
+                <td>@invoice.InvoiceTotal</td>
+                <td>
+                    <a href="/Invoices/AddOrUpdateInvoice/@invoice.InvoiceID">Edit</a>
+                    <a href="/Invoices/DeleteInvoice/@invoice.InvoiceID">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script>
+    Sortable.baseUrl = '/Invoices/AllInvoice/';
+</script>
+

@@ -1,0 +1,49 @@
+﻿@model List<Patel_DBP_A7_Project3.Models.State>
+
+@{
+    ViewBag.Title = "AllState";
+}
+
+<h2>List of States</h2>
+
+<a href="/States/AddOrUpdateState">Add New State</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <input id="txtSearch" type="text" class="form-control" placeholder="Search..." />
+    </div>
+    <div class="col-md-6">
+        <input type="button" class="btn btn-info" value="Search" onclick="Sortable.Search();" />
+    </div>
+</div>
+
+<table class="sortable table table-hover">
+    <thead>
+        <tr>
+            <th onclick="Sortable.Sort(0, true);">State Code</th>
+            <th onclick="Sortable.Sort(1, true);">State Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*Loop through the "allCustomers" list to display CustomerId and Customer *@
+        @*customer is an object/entity of Customer Class/Model through which we can access all the fields of that model/class/table *@
+
+        @foreach (var state in Model)
+        {
+            <tr>
+                <td>@state.StateCode</td>
+                <td>@state.StateName</td>
+                <td>
+                    <a href="/States/AddOrUpdateState/@state.StateCode">Edit</a>
+                    <a href="/States/DeleteState/@state.StateCode">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script>
+    Sortable.baseUrl = '/States/AllState/';
+</script>

@@ -1,0 +1,23 @@
+﻿@model Patel_DBP_A7_Project3.Models.State
+
+@{
+    ViewBag.Title = "AddOrUpdateState";
+}
+
+<h2>Add/Update State</h2>
+
+@using (Html.BeginForm("AddOrUpdateState", "States", FormMethod.Post))
+{
+    @Html.TextBoxFor(s => s.StateCode, new { @class = "form-control", placeholder = "StateCode" })
+    @Html.TextBoxFor(s => s.StateName, new { @class = "form-control", placeholder = "StateName" })
+
+    <input type="submit" name="Create" class="btn btn-info" />
+    <input type="reset" name="Clear" class="btn btn-info" />
+    <input type="button" name="Back" value="Back" onclick="HomePage()" class="btn btn-info" />
+}
+
+<script>
+    function HomePage() {
+        window.location.href = '/States/AllState/';
+    }
+</script>

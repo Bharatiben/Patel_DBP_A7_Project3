@@ -1,0 +1,48 @@
+﻿@model Patel_DBP_A7_Project3.Models.Customer
+@{
+    ViewBag.Title = "AddOrUpdateCustomer";
+}
+
+<h2>Add/Update Customer</h2>
+
+<link href="~/Content/geoAutoComplete.css" rel="stylesheet" />
+
+@using (Html.BeginForm("AddOrUpdateCustomer", "Customers", FormMethod.Post))
+{
+    @Html.HiddenFor(c => c.CustomerID, new { @class = "form-control" })
+    <label>Name:</label>
+    @Html.TextBoxFor(c => c.Name, new { @class = "form-control", placeholder = "Name" })
+    <label>Address:</label>
+    <div class="autocomplete-container" id="autocomplete-container"></div>
+
+    @Html.HiddenFor(c => c.Address, new { @class = "form-control", placeholder = "Address", id = "address" })
+    @Html.HiddenFor(c => c.City, new { @class = "form-control", placeholder = "City", id = "city" })
+    @Html.HiddenFor(c => c.State, new { @class = "form-control", placeholder = "State", id = "state" })
+
+    @*<input list="states" name="customer1.State" class="form-control" placeholder="StateCode" />
+        <datalist id="states">
+            @foreach (var state in Model.state1)
+            {
+                <option value="@state.StateCode">@state.StateName</option>
+            }
+        </datalist>*@
+
+    @Html.HiddenFor(c => c.ZipCode, new { @class = "form-control", placeholder = "ZipCode", id = "zipCode" })
+
+    <input type="submit" name="Create" class="btn btn-info" />
+    <input type="reset" name="Clear" class="btn btn-info" />
+    <input type="button" name="Back" value="Back" onclick="HomePage()" class="btn btn-info" />
+}
+
+<script>
+    function HomePage() {
+        window.location.href = '/Customers/AllCustomer/';
+    }
+</script>
+
+<script src="~/Scripts/geoAutoComplete.js"></script>
+
+<script>
+    let customerAddress = "@Model.Address @Model.City @Model.State @Model.ZipCode";
+    $("#autocomplete-container input").val(customerAddress);
+</script>

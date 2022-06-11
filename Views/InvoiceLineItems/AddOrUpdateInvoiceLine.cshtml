@@ -1,0 +1,41 @@
+﻿@model Patel_DBP_A7_Project3.Models.InvoiceLineItemDTO
+
+@{
+    ViewBag.Title = "AddOrUpdateInvoiceLine";
+}
+
+<h2>Add/Update Invoice LineItem</h2>
+
+@using (Html.BeginForm("AddOrUpdateInvoiceLine", "InvoiceLineItems", FormMethod.Post))
+{
+    <input list="invoices" name="invoiceLine1.InvoiceID" class="form-control" placeholder="Invoice Id" />
+    <datalist id="invoices">
+        @foreach (var invoice in Model.invoice1)
+        {
+            <option value="@invoice.InvoiceID"></option>
+        }
+    </datalist>
+
+    <input list="products" name="invoiceLine1.ProductCode" class="form-control" placeholder="Product Id" />
+    <datalist id="products">
+        @foreach (var product in Model.product1)
+        {
+            <option value="@product.ProductCode"></option>
+        }
+    </datalist>
+
+    @Html.TextBoxFor(i2 => i2.invoiceLine1.UnitPrice, new { @class = "form-control", placeholder = "UnitPrice" })
+    @Html.TextBoxFor(i2 => i2.invoiceLine1.Quantity, new { @class = "form-control", placeholder = "Quantity" })
+    @Html.TextBoxFor(i2 => i2.invoiceLine1.ItemTotal, new { @class = "form-control", placeholder = "ItemTotal" })
+
+
+    <input type="submit" name="Create" class="btn btn-info" />
+    <input type="reset" name="Clear" class="btn btn-info" />
+    <input type="button" name="Back" value="Back" onclick="HomePage()" class="btn btn-info" />
+}
+
+<script>
+    function HomePage() {
+        window.location.href = '/InvoiceLineItems/AllInvoiceLine/';
+    }
+</script>
